@@ -10,7 +10,6 @@ var app = http.createServer(function(req, res) {
   fileServer.serve(req, res);
 }).listen(8080);
 
-
 var io = socketIO.listen(app);
 io.sockets.on('connection', function(socket) {
 
@@ -58,6 +57,10 @@ io.sockets.on('connection', function(socket) {
         }
       });
     }
+  });
+
+  socket.on('bye', function(){
+    console.log('received bye');
   });
 
 });
