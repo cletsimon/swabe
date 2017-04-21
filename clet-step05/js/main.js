@@ -22,9 +22,13 @@ var sdpConstraints = {
 
 /////////////////////////////////////////////
 
-var room = 'foo';
-// Could prompt for room name:
-// room = prompt('Enter room name:');
+// Create a random room if not already present in the URL.
+var isInitiator;
+var room = window.location.hash.substring(1);
+console.log(room);
+if (!room) {
+  room = window.location.hash = randomToken();
+}
 
 var socket = io.connect();
 
@@ -342,4 +346,8 @@ function removeCN(sdpLines, mLineIndex) {
 
   sdpLines[mLineIndex] = mLineElements.join(' ');
   return sdpLines;
+}
+
+function randomToken() {
+  return Math.floor((1 + Math.random()) * 1e16).toString(16).substring(1);
 }
