@@ -36,13 +36,13 @@ io.sockets.on('connection', function(socket) {
       socket.join(room);
       log('Client ID ' + socket.id + ' created room ' + room);
       socket.emit('created', room, socket.id);
-
     } else if (numClients === 2) {
       log('Client ID ' + socket.id + ' joined room ' + room);
-      io.sockets.in(room).emit('join', room);
+      // io.sockets.in(room).emit('join', room);
       socket.join(room);
       socket.emit('joined', room, socket.id);
-      io.sockets.in(room).emit('ready');
+      io.sockets.in(room).emit('ready', room);
+      socket.broadcast.emit('ready', room);
     } else { // max two clients
       socket.emit('full', room);
     }
