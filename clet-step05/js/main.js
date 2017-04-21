@@ -10,7 +10,12 @@ var turnReady;
 
 var pcConfig = {
   'iceServers': [{
-    'urls': 'stun:stun.l.google.com:19302'
+    'url': 'stun:stun.l.google.com:19302'
+  },
+  {
+    'url': 'turn:153.120.62.40:2222',
+    'username':'lbiboadmin',
+    'password': 'lbiboadmin1',
   }]
 };
 
@@ -98,7 +103,7 @@ var localVideo = document.querySelector('#localVideo');
 var remoteVideo = document.querySelector('#remoteVideo');
 
 navigator.mediaDevices.getUserMedia({
-  audio: false,
+  audio: true,
   video: true
 })
 .then(gotStream)
